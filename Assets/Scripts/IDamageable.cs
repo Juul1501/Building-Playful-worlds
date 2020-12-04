@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void Damage(float damage,GameObject sender);
+    void Damage(float damage, RaycastHit hit);
 }

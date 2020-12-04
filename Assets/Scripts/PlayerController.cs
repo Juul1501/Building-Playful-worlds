@@ -48,10 +48,9 @@ public class PlayerController : MonoBehaviour
         angleX += mouseX * Time.deltaTime * mouseSensitivity;
         angleY += mouseY * Time.deltaTime * mouseSensitivity;
 
-        Mathf.Clamp(angleY, -89f, 89f);
-
         transform.rotation = Quaternion.Euler(0, angleX, 0);
         camera.transform.localRotation = Quaternion.Euler(-angleY, 0, 0);
+        Mathf.Clamp(angleY, 89f, -89f);
     }
 
     void Move()

@@ -6,13 +6,12 @@ public class Gun : MonoBehaviour
 {
     public float damage = 10f;
     public float range = 100f;
+    public ParticleSystem muzzleFlash;
 
     public Camera cam;
-    private GameObject player;
 
     private void Start()
     {
-        player = GameObject.Find("Player");
     }
 
     void Update()
@@ -30,9 +29,10 @@ public class Gun : MonoBehaviour
         if (hit.transform.GetComponent<IDamageable>() != null )
         {
             IDamageable hitObj = hit.transform.GetComponent<IDamageable>();
-            hitObj.Damage(damage, player);
+            hitObj.Damage(damage, hit);
         }
         Debug.Log(hit.collider.gameObject.name);
+        muzzleFlash.Play();
 
     }
 }
