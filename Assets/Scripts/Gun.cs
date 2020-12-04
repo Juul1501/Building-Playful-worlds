@@ -8,10 +8,16 @@ public class Gun : MonoBehaviour
     public float range = 100f;
 
     public Camera cam;
+    private GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.Find("Player");
+    }
 
     void Update()
     {
-        if(Input.GetButtonDown("Fire 1"))
+        if(Input.GetButtonDown("Fire1"))
         {
             Shoot();
         }
@@ -21,11 +27,12 @@ public class Gun : MonoBehaviour
     {
         RaycastHit hit;
         Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range);
-        if (hit.transform.GetComponent<IDamageable<float>>() != null )
+        if (hit.transform.GetComponent<IDamageable>() != null )
         {
-            IDamageable<float> hitObj = hit.transform.GetComponent<IDamageable<float>>();
-            hitObj.Damage(damage);
+            IDamageable hitObj = hit.transform.GetComponent<IDamageable>();
+            hitObj.Damage(damage, player);
         }
+        Debug.Log(hit.collider.gameObject.name);
 
     }
 }

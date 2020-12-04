@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamageable<T>
+public interface IDamageable
 {
-    void Damage(T damage);
+    void Damage(float damage,GameObject sender);
 }
