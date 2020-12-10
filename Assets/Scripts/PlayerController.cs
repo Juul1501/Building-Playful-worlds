@@ -36,12 +36,14 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = -2;
         }
-        CameraLook();
         Move();
+        CameraLook();
+        
     }
 
     void CameraLook()
     {
+        
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
@@ -49,8 +51,9 @@ public class PlayerController : MonoBehaviour
         angleY += mouseY * Time.deltaTime * mouseSensitivity;
 
         transform.rotation = Quaternion.Euler(0, angleX, 0);
+        Mathf.Clamp(angleY, -90f, 90f);
         camera.transform.localRotation = Quaternion.Euler(-angleY, 0, 0);
-        Mathf.Clamp(angleY, 89f, -89f);
+
     }
 
     void Move()

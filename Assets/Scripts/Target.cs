@@ -15,7 +15,7 @@ public class Target : MonoBehaviour, IDamageable
         }
         if(rb != null)
         {
-            rb.AddForce(-hit.normal * damage,ForceMode.Impulse);
+            rb.AddForce(-hit.normal * damage*10,ForceMode.Force);
         }
     }
 
