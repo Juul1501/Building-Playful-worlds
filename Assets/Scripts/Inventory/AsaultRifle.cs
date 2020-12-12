@@ -7,13 +7,18 @@ public class AsaultRifle : Weapon
 {
     public GameObject impactEffect;
     public ParticleSystem muzzleFlash;
+    public Animator anim;
 
+    private void Awake()
+    {
+    }
     protected override void Shoot()
     {
         if (ammo <= 0)
             return;
 
         isReloading = false;
+        anim.SetBool("Shooting", true);
         RaycastHit hit;
         Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range);
         if (hit.transform.GetComponent<IDamageable<RaycastHit>>() != null)
@@ -26,6 +31,8 @@ public class AsaultRifle : Weapon
         Destroy(obj, 2f);
         muzzleFlash.Play();
         ammo -= 1;
+
+        anim.SetBool("Shooting", false);
     }
 
     protected override void Reload()
