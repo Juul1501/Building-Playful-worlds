@@ -45,12 +45,14 @@ MonoBehaviour:
   range: 50
   ammo: 15
   magSize: 15
-  fireRate: 0.1
+  fireRate: 1500
   reloadTime: 2
   offset: {x: 0.18, y: -0.143, z: 0.291}
   isEquiped: 0
   impactEffect: {fileID: 8853384272291391750, guid: 027bbddd11ceb9b479ec45b0a2b592b5, type: 3}
   muzzleFlash: {fileID: 4900440305575727435}
+  verticalRecoil: 2
+  recoilDuration: 0.05
 --- !u!1001 &3180308506745305053
 PrefabInstance:
   m_ObjectHideFlags: 0

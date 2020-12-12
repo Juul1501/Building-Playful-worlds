@@ -24,7 +24,9 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded;
 
-
+    private float time;
+    private float duration;
+    private float recoil;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -59,8 +61,12 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, angleX, 0);
         angleY = Mathf.Clamp(angleY, -90f, 90f);
         camera.transform.localRotation = Quaternion.Euler(-angleY, 0, 0);
-        
 
+        if(time > 0)
+        {
+            angleY += recoil * Time.deltaTime / duration;
+            time -= Time.deltaTime;
+        }
     }
 
     void Move()
@@ -95,5 +101,12 @@ public class PlayerController : MonoBehaviour
                 i.Action();
             }
         }
+    }
+
+    public void Recoil(float recoildHeight,float recoilDuration)
+    {
+        recoil = recoildHeight;
+        duration = recoilDuration;
+        time = duration;
     }
 }

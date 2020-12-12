@@ -18,23 +18,12 @@ public abstract class Weapon : MonoBehaviour, IInteractable
 
     protected void Start()
     {
-
+        fireRate = 60 / fireRate;
     }
 
     protected virtual void Update()
     {
-        if (!isEquiped)
-            return;
 
-        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
-        {
-            nextTimeToFire = Time.time + fireRate;
-            Shoot();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Reload();
-        }
     }
 
     abstract protected void Shoot();

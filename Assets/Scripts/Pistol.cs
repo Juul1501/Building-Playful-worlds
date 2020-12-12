@@ -6,7 +6,8 @@ public class Pistol : Weapon
 {
     public GameObject impactEffect;
     public ParticleSystem muzzleFlash;
-
+    public float verticalRecoil;
+    public float recoilDuration;
     protected override void Update()
     {
         if (!isEquiped)
@@ -40,6 +41,7 @@ public class Pistol : Weapon
         Destroy(obj, 2f);
         muzzleFlash.Play();
         ammo -= 1;
+        GenerateRecoil();
     }
 
     protected override void Reload()
@@ -53,5 +55,9 @@ public class Pistol : Weapon
         yield return new WaitForSeconds(reloadTime);
         ammo += magSize - ammo;
         isReloading = false;
+    }
+    void GenerateRecoil()
+    {
+        GameManager.instance.playerController.Recoil(verticalRecoil, recoilDuration);
     }
 }
