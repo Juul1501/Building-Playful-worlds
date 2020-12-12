@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 3;
     public CharacterController controller;
 
+    public float interactRange = 2f;
+
     public float mouseSensitivity = 120;
     public GameObject camera;
 
@@ -38,6 +40,10 @@ public class PlayerController : MonoBehaviour
         }
         Move();
         CameraLook();
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
+        }
         
     }
 
@@ -51,8 +57,9 @@ public class PlayerController : MonoBehaviour
         angleY += mouseY * Time.deltaTime * mouseSensitivity;
 
         transform.rotation = Quaternion.Euler(0, angleX, 0);
-        Mathf.Clamp(angleY, -90f, 90f);
+        angleY = Mathf.Clamp(angleY, -90f, 90f);
         camera.transform.localRotation = Quaternion.Euler(-angleY, 0, 0);
+        
 
     }
 
@@ -73,4 +80,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Interact()
+    {
+        Ray r = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        RaycastHit hit;
+
+        int ignorePlayer = ~LayerMask.GetMask("Player");
+
+        if (Physics.Raycast(r, out hit, interactRange, ignorePlayer))
+        {
+            IInteractable i = hit.collider.gameObject.GetComponent<IInteractable>();
+            if (i != null)
+            {
+                i.Action();
+            }
+        }
+    }
 }

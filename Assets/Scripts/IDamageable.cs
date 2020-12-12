@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamageable
+public interface IDamageable<T>
 {
-    void Damage(float damage, RaycastHit hit);
+    void Damage(float damage, T hit);
 }

@@ -1,17 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
-
-    private List<Item> items;
     public float maximumWeight = 10.0f;
     public float totalWeight;
-
+    public Weapon[] weapons = new Weapon[2];
+    private List<Item> items;
+    private Weapon currentWeapon;
+    public GameObject player;
     void Awake()
     {
         if (instance == null)
@@ -23,7 +22,6 @@ public class Inventory : MonoBehaviour
         {
             Destroy(this);
         }
-
         items = new List<Item>();
     }
 
@@ -63,30 +61,45 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public bool haskey(int id)
+    public bool AddWeapon(Weapon weapon)
     {
-        for (int i = 0; i < items.Count; i++)
+        for (int i = 0; i < weapons.Length; i++)
         {
-            if (items[i] is AccessItem)
+            if (weapons[i] != null)
             {
-                AccessItem it = (AccessItem)items[i];
-                if (it.door == id)
-                {
-                    return true;
-                }
+                return false;
+            }
+            else
+            {
+                weapons[i] = weapon;
+                Weapon w = weapons[i].GetComponent<Weapon>();
+                w.transform.parent = Camera.main.transform;
+                w.transform.localPosition = w.offset;
+                w.transform.rotation = Camera.main.transform.rotation;
+
+                w.gameObject.SetActive(false);
+                return true;
             }
         }
-
         return false;
     }
 
-    public void printToConsole()
+    public void SelectWeapon(int slot)
     {
-        foreach (Item i in items)
+        if(slot < weapons.Length && currentWeapon != weapons[slot] && weapons[slot] != null)
         {
-            Debug.Log(i.name + "--" + i.weight);
+            currentWeapon = weapons[slot];
+            currentWeapon.GetComponent<Collider>().enabled = false;
+            currentWeapon.GetComponent<Rigidbody>().isKinematic = true;
+            currentWeapon.isEquiped = true;
+            currentWeapon.gameObject.SetActive(true);
         }
+    }
 
-        Debug.Log("Total Weight:" + totalWeight);
+    public void DropWeapon(int slot)
+    {
+        currentWeapon.Respawn();
+        currentWeapon = null;
+        weapons[slot] = null;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Target : MonoBehaviour, IDamageable
+public class Target : MonoBehaviour, IDamageable<RaycastHit>
 {
     public float health = 50f;
     public Rigidbody rb;
