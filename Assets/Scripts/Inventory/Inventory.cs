@@ -9,6 +9,7 @@ public class Inventory : MonoBehaviour
     public float totalWeight;
     public Weapon[] weapons = new Weapon[2];
     private List<Item> items;
+    public int currentSlot = 0;
     private Weapon currentWeapon;
     public GameObject player;
     void Awake()
@@ -61,38 +62,43 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public bool AddWeapon(Weapon weapon)
+    public bool AddWeapon(Weapon weapon, int activeSlot)
     {
-        for (int i = 0; i < weapons.Length; i++)
+        if (weapons[activeSlot] != null)
         {
-            if (weapons[i] != null)
-            {
-                return false;
-            }
-            else
-            {
-                weapons[i] = weapon;
-                Weapon w = weapons[i].GetComponent<Weapon>();
-                w.transform.parent = Camera.main.transform;
-                w.transform.localPosition = w.offset;
-                w.transform.rotation = Camera.main.transform.rotation;
-
-                w.gameObject.SetActive(false);
-                return true;
-            }
+            return false;
         }
-        return false;
+        else
+        {
+            weapons[activeSlot] = weapon;
+            Weapon w = weapon;
+            w.transform.parent = Camera.main.transform;
+            w.transform.localPosition = w.offset;
+            w.transform.rotation = Camera.main.transform.rotation;
+
+            w.gameObject.SetActive(false);
+            SelectWeapon(activeSlot);
+            return true;
+        }
+
     }
 
     public void SelectWeapon(int slot)
     {
-        if(slot < weapons.Length && currentWeapon != weapons[slot] && weapons[slot] != null)
+        if (slot < weapons.Length && currentWeapon != weapons[slot])
         {
+            if (currentWeapon != null)
+            {
+                currentWeapon.gameObject.SetActive(false);
+            }
             currentWeapon = weapons[slot];
-            currentWeapon.GetComponent<Collider>().enabled = false;
-            currentWeapon.GetComponent<Rigidbody>().isKinematic = true;
-            currentWeapon.isEquiped = true;
-            currentWeapon.gameObject.SetActive(true);
+            if (currentWeapon != null)
+            {
+                currentWeapon.gameObject.GetComponent<Collider>().enabled = false;
+                currentWeapon.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                currentWeapon.isEquiped = true;
+                currentWeapon.gameObject.SetActive(true);
+            }
         }
     }
 

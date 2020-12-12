@@ -21,7 +21,7 @@ public abstract class Weapon : MonoBehaviour, IInteractable
 
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         if (!isEquiped)
             return;
@@ -42,7 +42,7 @@ public abstract class Weapon : MonoBehaviour, IInteractable
 
     public void Action()
     {
-        Inventory.instance.AddWeapon(this.gameObject.GetComponent<Weapon>());
+        Inventory.instance.AddWeapon(this.gameObject.GetComponent<Weapon>(),Inventory.instance.currentSlot);
     }
     public void Respawn()
     {

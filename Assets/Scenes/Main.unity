@@ -13914,7 +13914,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &693875474
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37583,6 +37583,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 0}
   - {fileID: 0}
+  currentSlot: 0
   player: {fileID: 0}
 --- !u!4 &1741928713
 Transform:
@@ -47112,18 +47113,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 763421188, guid: 676b89f6be985954caf6dda99e186982, type: 3}
-      propertyPath: offset.x
-      value: 0.422
-      objectReference: {fileID: 0}
-    - target: {fileID: 763421188, guid: 676b89f6be985954caf6dda99e186982, type: 3}
-      propertyPath: offset.y
-      value: -0.211
-      objectReference: {fileID: 0}
-    - target: {fileID: 763421188, guid: 676b89f6be985954caf6dda99e186982, type: 3}
-      propertyPath: offset.z
-      value: 0.33
-      objectReference: {fileID: 0}
     - target: {fileID: 2552274975369907090, guid: 676b89f6be985954caf6dda99e186982, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -47176,17 +47165,5 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: c7c776d706dbe4e41b5d53134a57fbdc, type: 2}
-    - target: {fileID: 8058014196622406227, guid: 676b89f6be985954caf6dda99e186982, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8058014196622406227, guid: 676b89f6be985954caf6dda99e186982, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8058014196622406227, guid: 676b89f6be985954caf6dda99e186982, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 676b89f6be985954caf6dda99e186982, type: 3}
