@@ -9,10 +9,10 @@ public abstract class Pickup : MonoBehaviour, IInteractable
     public Sprite image;
     private GameObject inventoryObj;
 
-    void Start()
-    {
-        InventoryUI.instance.RegisterPickUpItem(this);
-    }
+    //void Start()
+    //{
+    //    InventoryUI.instance.RegisterPickUpItem(this);
+    //}
     
     public void Action()
     {

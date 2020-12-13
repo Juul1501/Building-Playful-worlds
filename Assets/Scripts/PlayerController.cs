@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -27,13 +28,24 @@ public class PlayerController : MonoBehaviour
     private float time;
     private float duration;
     private float recoil;
+
+    PhotonView pv;
     void Start()
     {
+        pv = GetComponent<PhotonView>();
+        if (!pv.IsMine)
+        {
+            Destroy(GetComponentInChildren<Camera>().gameObject);
+        }
         Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
     void Update()
     {
+        if (!pv.IsMine)
+            return;
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0)
