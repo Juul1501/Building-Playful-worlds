@@ -6,6 +6,7 @@ public class Target : MonoBehaviour, IDamageable<RaycastHit>
 {
     public float health = 50f;
     public Rigidbody rb;
+    public float force;
     public void Damage(float damage,RaycastHit hit)
     {
         health -= damage;
@@ -15,7 +16,7 @@ public class Target : MonoBehaviour, IDamageable<RaycastHit>
         }
         if(rb != null)
         {
-            rb.AddForce(-hit.normal * damage*10,ForceMode.Force);
+            rb.AddForce(-hit.normal * damage*force,ForceMode.Force);
         }
     }
 
