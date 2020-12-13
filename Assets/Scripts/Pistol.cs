@@ -5,9 +5,23 @@ using UnityEngine;
 public class Pistol : Weapon
 {
     public GameObject impactEffect;
-    public ParticleSystem muzzleFlash;
+    public GameObject muzzleFlash;
+    public Transform flashHolder;
+
+    public AudioSource audioSource;
+    public AudioClip shootSound;
+    public AudioClip reloadSound;
+
     public float verticalRecoil;
     public float recoilDuration;
+
+    public Animator anim;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     protected override void Update()
     {
         if (!isEquiped)
@@ -18,6 +32,8 @@ public class Pistol : Weapon
             nextTimeToFire = Time.time + fireRate;
             Shoot();
         }
+        if (!Input.GetButton("Fire1")) anim.SetBool("Shooting", false);
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             Reload();
@@ -28,6 +44,7 @@ public class Pistol : Weapon
         if (ammo <= 0)
             return;
 
+        anim.SetBool("Shooting", true);
         isReloading = false;
         RaycastHit hit;
         Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range);
@@ -39,7 +56,13 @@ public class Pistol : Weapon
         }
         GameObject obj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(obj, 2f);
-        muzzleFlash.Play();
+
+        GameObject flash = Instantiate(muzzleFlash, flashHolder);
+        flash.transform.position = flashHolder.position;
+        flash.transform.rotation = flashHolder.rotation;
+
+        audioSource.PlayOneShot(shootSound);
+
         ammo -= 1;
         GenerateRecoil();
     }
@@ -51,6 +74,7 @@ public class Pistol : Weapon
     }
     IEnumerator ReloadWeapon()
     {
+        audioSource.PlayOneShot(reloadSound);
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
         ammo += magSize - ammo;

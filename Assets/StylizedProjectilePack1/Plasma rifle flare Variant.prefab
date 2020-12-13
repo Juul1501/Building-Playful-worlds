@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &2909437248732165452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6830182972989072967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a895231490da6545890b1e1794f8704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathtimer: 0.2
+--- !u!1001 &6830309960580250569
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1000012903210382, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_Name
+      value: Plasma rifle flare Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010921236120, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010921236120, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010921236120, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010921236120, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 20.821215
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010921236120, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010921236120, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010921236120, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010921236120, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010921236120, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010921236120, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010921236120, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000011708101332, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: lengthInSec
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 198000011708101332, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: LightsModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198764458523837618, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: lengthInSec
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198764458523837618, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: LightsModule.light
+      value: 
+      objectReference: {fileID: 4135416343325360480}
+    - target: {fileID: 198764458523837618, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: LightsModule.range
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198764458523837618, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: LightsModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198764458523837618, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: LightsModule.intensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198764458523837618, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: LightsModule.maxLights
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198764458523837618, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: LightsModule.rangeCurve.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198764458523837618, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 198764458523837618, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: LightsModule.intensityCurve.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199000010259268804, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199000010420214726, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199336881837701072, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199422977892658642, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199671105658853138, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469732322274867881, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_Range
+      value: 17.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469732322274867881, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469732322274867881, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_Intensity
+      value: 8.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469732322274867881, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469732322274867881, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469732322274867881, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469732322274867881, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8827839681561880229, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.005
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+--- !u!1 &6830182972989072967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000012903210382, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+  m_PrefabInstance: {fileID: 6830309960580250569}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &4135416343325360480 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 7469732322274867881, guid: 6a0a0f7a97e0e7747accda091cb14743, type: 3}
+  m_PrefabInstance: {fileID: 6830309960580250569}
+  m_PrefabAsset: {fileID: 0}

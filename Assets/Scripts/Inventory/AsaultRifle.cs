@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class AsaultRifle : Weapon
 {
     public GameObject impactEffect;
-    public ParticleSystem muzzleFlash;
+    public GameObject muzzleFlash;
+    public Transform flashHolder;
+
+    public AudioSource audioSource;
+    public AudioClip shootSound;
+    public AudioClip reloadSound;
+
     public float verticalRecoil;
     public float recoilDuration;
-    //public Animator anim;
+    public Animator anim;
     private PlayerController playerController;
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
     }
     protected override void Shoot()
     {
@@ -20,7 +26,7 @@ public class AsaultRifle : Weapon
             return;
 
         isReloading = false;
-        //anim.SetBool("Shooting", true);
+        anim.SetBool("Shooting", true);
         RaycastHit hit;
         Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range);
         if (hit.transform.GetComponent<IDamageable<RaycastHit>>() != null)
@@ -31,12 +37,16 @@ public class AsaultRifle : Weapon
         }
         GameObject obj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(obj, 2f);
-        muzzleFlash.Play();
+
+        GameObject flash = Instantiate(muzzleFlash, flashHolder);
+        flash.transform.position = flashHolder.position;
+        flash.transform.rotation = flashHolder.rotation;
+
+        audioSource.PlayOneShot(shootSound);
         ammo -= 1;
         GenerateRecoil();
 
 
-        //anim.SetBool("Shooting", false);
     }
 
     protected override void Reload()
@@ -46,6 +56,7 @@ public class AsaultRifle : Weapon
     }
     IEnumerator ReloadWeapon()
     {
+        audioSource.PlayOneShot(reloadSound);
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
         ammo += magSize - ammo;
@@ -62,10 +73,15 @@ public class AsaultRifle : Weapon
             nextTimeToFire = Time.time + fireRate;
             Shoot();
         }
+
+        if (!Input.GetButton("Fire1")) anim.SetBool("Shooting", false);
+
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             Reload();
         }
+
     }
 
     void GenerateRecoil()
