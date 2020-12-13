@@ -7,6 +7,7 @@ public class Target : MonoBehaviour, IDamageable<RaycastHit>
     public float health = 50f;
     public Rigidbody rb;
     public float force;
+    public GameObject explosion;
     public void Damage(float damage,RaycastHit hit)
     {
         health -= damage;
@@ -22,6 +23,8 @@ public class Target : MonoBehaviour, IDamageable<RaycastHit>
 
     void Die()
     {
+        var go = Instantiate(explosion, transform.position, transform.rotation);
+        Destroy(go, 2f);
         Destroy(this.gameObject);
     }
 }
