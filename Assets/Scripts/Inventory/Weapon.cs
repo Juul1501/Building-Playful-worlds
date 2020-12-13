@@ -16,8 +16,11 @@ public abstract class Weapon : MonoBehaviour, IInteractable
     protected float nextTimeToFire = 0;
     public bool isEquiped;
 
+    public PlayerController player;
+
     protected void Start()
     {
+        player = GetComponentInParent<PlayerController>();
         fireRate = 60 / fireRate;
     }
 
@@ -31,7 +34,7 @@ public abstract class Weapon : MonoBehaviour, IInteractable
 
     public void Action()
     {
-        Inventory.instance.AddWeapon(this.gameObject.GetComponent<Weapon>(),Inventory.instance.currentSlot);
+        //Inventory.instance.AddWeapon(this.gameObject.GetComponent<Weapon>(),Inventory.instance.currentSlot);
     }
     public void Respawn()
     {

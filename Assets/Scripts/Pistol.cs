@@ -82,6 +82,6 @@ public class Pistol : Weapon
     }
     void GenerateRecoil()
     {
-        GameManager.instance.playerController.Recoil(verticalRecoil, recoilDuration);
+        player.Recoil(verticalRecoil, recoilDuration);
     }
 }

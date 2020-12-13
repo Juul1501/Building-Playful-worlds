@@ -87,6 +87,6 @@ public class AsaultRifle : Weapon
     void GenerateRecoil()
     {
 
-        GameManager.instance.playerController.Recoil(verticalRecoil,recoilDuration);
+        player.Recoil(verticalRecoil,recoilDuration);
     }
 }

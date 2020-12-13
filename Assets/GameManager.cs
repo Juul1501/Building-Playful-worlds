@@ -5,8 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameObject player;
-    public PlayerController playerController;
+
+    public Transform spawnpoint;
     void Awake()
     {
         if (instance == null)
@@ -22,7 +22,5 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerController = player.GetComponent<PlayerController>();
     }
 }
