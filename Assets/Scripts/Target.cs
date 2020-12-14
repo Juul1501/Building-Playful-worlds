@@ -14,7 +14,7 @@ public class Target : MonoBehaviourPunCallbacks, IDamageable<RaycastHit>
         health -= damage;
         if(health <= 0)
         {
-            Die();
+            Die(hit);
         }
         if(rb != null)
         {
@@ -22,11 +22,8 @@ public class Target : MonoBehaviourPunCallbacks, IDamageable<RaycastHit>
         }
     }
 
-    void Die()
+    void Die(RaycastHit hit)
     {
-        //var go = Instantiate(explosion, transform.position, transform.rotation);
-        var go = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "explosion"), transform.position, transform.rotation);
-        GameManager.instance.destroy(go, 2f);
-        GameManager.instance.destroy(this.gameObject,0f);
+        var go = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "explosion"), transform.position, transform.rotation);   
     }
 }
