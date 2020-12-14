@@ -34,7 +34,6 @@ public class AsaultRifle : Weapon
         {
             IDamageable<RaycastHit> hitObj = hit.transform.GetComponent<IDamageable<RaycastHit>>();
             hitObj.Damage(damage, hit);
-
         }
         //GameObject obj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
         GameObject obj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "impacteffect"), hit.point, Quaternion.LookRotation(hit.normal));
@@ -42,6 +41,7 @@ public class AsaultRifle : Weapon
 
         //GameObject flash = Instantiate(muzzleFlash, flashHolder);
         GameObject flash = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "rifleflare"), flashHolder.position, flashHolder.rotation);
+        flash.transform.parent = flashHolder;
         //StartCoroutine(player.destroy(flash, 2f));
         audioSource.PlayOneShot(shootSound);
         ammo -= 1;

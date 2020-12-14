@@ -299,7 +299,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2552274976047250262}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!95 &2552274976047250258
 Animator:
   serializedVersion: 3

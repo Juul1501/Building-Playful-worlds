@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviourPunCallbacks
+public class PlayerController : MonoBehaviourPunCallbacks,IPunObservable
 {
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         if (!pv.IsMine)
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
+            Destroy(GetComponentInChildren<AudioListener>());
         }
         Cursor.lockState = CursorLockMode.Locked;
         
@@ -121,16 +122,18 @@ public class PlayerController : MonoBehaviourPunCallbacks
         duration = recoilDuration;
         time = duration;
     }
-    public IEnumerator destroy(GameObject g, float t)
-    {
-        yield return new WaitForSeconds(t);
-        photonView.RPC("DestroyObject", RpcTarget.All,g);
-    }
 
-    [PunRPC]
-    public void DestroyObject(object g)
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        var obj = g as GameObject;
-        Destroy(obj);
+        if (stream.IsWriting)
+        {
+            //stream.SendNext(transform.position);
+            //stream.SendNext(transform.rotation);
+        }
+        else
+        {
+            //transform.position = (Vector3)stream.ReceiveNext();
+            //transform.rotation = (Quaternion)stream.ReceiveNext();
+        }
     }
 }

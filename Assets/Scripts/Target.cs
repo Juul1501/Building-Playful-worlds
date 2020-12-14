@@ -3,27 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
-public class Target : MonoBehaviourPunCallbacks, IDamageable<RaycastHit>
+public class Target : MonoBehaviourPunCallbacks, IDamageable<RaycastHit>,IPunObservable
 {
     public float health = 50f;
     public Rigidbody rb;
     public float force;
     public GameObject explosion;
-    public void Damage(float damage,RaycastHit hit)
+
+    void Die()
     {
-        health -= damage;
-        if(health <= 0)
+        if(GetComponent<PhotonView>() == null)
         {
-            Die(hit);
+            gameObject.AddComponent<PhotonView>(); 
         }
-        if(rb != null)
+        var go = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "explosion"), transform.position, transform.rotation);
+        Destroy(this.gameObject);
+    }
+
+    public void Damage(float damage, RaycastHit hit)
+    {
+        photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage, hit.normal);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
         {
-            rb.AddForce(-hit.normal * damage*force,ForceMode.Force);
+            stream.SendNext(health);
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+        }
+        else
+        {
+            health = (float)stream.ReceiveNext();
+            transform.position = (Vector3)stream.ReceiveNext();
+            transform.rotation = (Quaternion)stream.ReceiveNext();
         }
     }
 
-    void Die(RaycastHit hit)
+    [PunRPC]
+    public void TakeDamage(float damage, Vector3 normal)
     {
-        var go = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "explosion"), transform.position, transform.rotation);   
+        health -= damage;
+        if (health <= 0)
+        {
+            GameManager.instance.DestroySceneObject(this.photonView);
+            Die();
+        }
+        if (rb != null)
+        {
+            rb.AddForce(-normal * damage * force, ForceMode.Force);
+        }
     }
 }
