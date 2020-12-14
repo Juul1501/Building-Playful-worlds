@@ -6,6 +6,8 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager instance;
     [SerializeField] Menu[] menus;
+    public Transform[] cameraPositions;
+
     public void Awake()
     {
         if (instance == null)
