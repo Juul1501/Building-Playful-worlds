@@ -6,6 +6,11 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager instance;
     [SerializeField] Menu[] menus;
+    public Transform[] cameraAngles;
+    public CameraFollow camFollow;
+    public float smoothTime = 0.3F;
+    private Vector3 velocity = Vector3.zero;
+
     public void Awake()
     {
         if (instance == null)
@@ -24,6 +29,7 @@ public class MenuManager : MonoBehaviour
 			if (menus[i].name == menuName)
 			{
 				menus[i].Open();
+                if(i != 0) MoveCamera(cameraAngles[i]);
 			}
 			else if (menus[i].open)
 			{
@@ -40,6 +46,8 @@ public class MenuManager : MonoBehaviour
 			{
 				CloseMenu(menus[i]);
 			}
+
+            if (menu == menus[i]) MoveCamera(cameraAngles[i]);
 		}
 		menu.Open();
 	}
@@ -48,4 +56,9 @@ public class MenuManager : MonoBehaviour
 	{
 		menu.Close();
 	}
+
+    public void MoveCamera(Transform angle)
+    {
+        camFollow.target = angle;
+    }
 }
