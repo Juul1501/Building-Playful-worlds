@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Target : MonoBehaviour, IDamageable<RaycastHit>
+using Photon.Pun;
+using System.IO;
+public class Target : MonoBehaviourPunCallbacks, IDamageable<RaycastHit>
 {
     public float health = 50f;
     public Rigidbody rb;
@@ -23,8 +24,9 @@ public class Target : MonoBehaviour, IDamageable<RaycastHit>
 
     void Die()
     {
-        var go = Instantiate(explosion, transform.position, transform.rotation);
-        Destroy(go, 2f);
-        Destroy(this.gameObject);
+        //var go = Instantiate(explosion, transform.position, transform.rotation);
+        var go = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "explosion"), transform.position, transform.rotation);
+        GameManager.instance.destroy(go, 2f);
+        GameManager.instance.destroy(this.gameObject,0f);
     }
 }

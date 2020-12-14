@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public abstract class Weapon : MonoBehaviour, IInteractable
+public abstract class Weapon : MonoBehaviourPunCallbacks, IInteractable
 {
     public int damage;
     public float range;

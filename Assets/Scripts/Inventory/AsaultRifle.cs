@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
+using System.IO;
 public class AsaultRifle : Weapon
 {
     public GameObject impactEffect;
@@ -35,13 +36,13 @@ public class AsaultRifle : Weapon
             hitObj.Damage(damage, hit);
 
         }
-        GameObject obj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-        Destroy(obj, 2f);
+        //GameObject obj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+        GameObject obj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "impacteffect"), hit.point, Quaternion.LookRotation(hit.normal));
+        StartCoroutine(GameManager.instance.destroy(obj,2f));
 
-        GameObject flash = Instantiate(muzzleFlash, flashHolder);
-        flash.transform.position = flashHolder.position;
-        flash.transform.rotation = flashHolder.rotation;
-
+        //GameObject flash = Instantiate(muzzleFlash, flashHolder);
+        GameObject flash = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "rifleflare"), flashHolder.position, flashHolder.rotation);
+        StartCoroutine(GameManager.instance.destroy(flash, 2f));
         audioSource.PlayOneShot(shootSound);
         ammo -= 1;
         GenerateRecoil();
@@ -89,4 +90,6 @@ public class AsaultRifle : Weapon
 
         player.Recoil(verticalRecoil,recoilDuration);
     }
+
+
 }

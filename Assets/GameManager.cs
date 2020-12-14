@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class GameManager : MonoBehaviour
+using Photon.Pun;
+using Photon.Realtime;
+public class GameManager : MonoBehaviourPunCallbacks
 {
     public static GameManager instance;
 
@@ -22,5 +23,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+    }
+    public IEnumerator destroy(GameObject g, float t)
+    {
+        yield return new WaitForSeconds(t);
+        PhotonNetwork.Destroy(g);
     }
 }
