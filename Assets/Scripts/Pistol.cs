@@ -39,7 +39,6 @@ public class Pistol : Weapon
             Reload();
         }
     }
-
     protected override void Shoot()
     {
         if (ammo <= 0)

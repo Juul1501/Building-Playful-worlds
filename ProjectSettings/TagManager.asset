@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - FX
-  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -18,7 +17,7 @@ TagManager:
   - Ground
   - Postpros
   - Plasma
-  - UIpostpros
+  - 
   - 
   - 
   - 
