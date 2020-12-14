@@ -121,16 +121,4 @@ public class PlayerController : MonoBehaviourPunCallbacks
         duration = recoilDuration;
         time = duration;
     }
-    public IEnumerator destroy(GameObject g, float t)
-    {
-        yield return new WaitForSeconds(t);
-        photonView.RPC("DestroyObject", RpcTarget.All,g);
-    }
-
-    [PunRPC]
-    public void DestroyObject(object g)
-    {
-        var obj = g as GameObject;
-        Destroy(obj);
-    }
 }

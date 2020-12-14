@@ -38,11 +38,11 @@ public class AsaultRifle : Weapon
         }
         //GameObject obj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
         GameObject obj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "impacteffect"), hit.point, Quaternion.LookRotation(hit.normal));
-        //StartCoroutine(player.destroy(obj,2f));
+        StartCoroutine(GameManager.instance.destroy(obj,2f));
 
         //GameObject flash = Instantiate(muzzleFlash, flashHolder);
         GameObject flash = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "rifleflare"), flashHolder.position, flashHolder.rotation);
-        //StartCoroutine(player.destroy(flash, 2f));
+        StartCoroutine(GameManager.instance.destroy(flash, 2f));
         audioSource.PlayOneShot(shootSound);
         ammo -= 1;
         GenerateRecoil();

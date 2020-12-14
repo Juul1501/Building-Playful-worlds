@@ -24,4 +24,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void Start()
     {
     }
+    public IEnumerator destroy(GameObject g, float t)
+    {
+        yield return new WaitForSeconds(t);
+        PhotonNetwork.Destroy(g);
+    }
 }
