@@ -61,4 +61,9 @@ public class MenuManager : MonoBehaviour
     {
         camFollow.target = angle;
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
