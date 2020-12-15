@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1632933772596776629}
   - component: {fileID: 6307671952545699632}
   - component: {fileID: 7768328135875181629}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 1070916006922499369}
   - component: {fileID: 4675504187756830416}
   - component: {fileID: 485726248906722656}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8736819119901194805}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 8736819120076028008}
   - component: {fileID: 8736819120076028011}
   - component: {fileID: 712138554905826496}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 8736819120489042925}
   - component: {fileID: 8736819120489042920}
   - component: {fileID: 6509084794213443769}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 6509084793591790082}
   - component: {fileID: 403530150291857964}
   - component: {fileID: 6044084972648186252}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -519,6 +519,7 @@ MonoBehaviour:
   speed: 7
   gravity: -15
   jumpHeight: 1.5
+  health: 100
   controller: {fileID: 8736819121166476073}
   interactRange: 3
   mouseSensitivity: 100

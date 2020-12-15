@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviourPunCallbacks,IPunObservable,IDamage
         }
     }
     [PunRPC]
-    void Respawn()
+    public void Respawn()
     {
         transform.position = GameManager.instance.spawnpoint.position;
         health = 100f;
