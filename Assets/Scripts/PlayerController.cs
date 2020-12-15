@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
-public class PlayerController : MonoBehaviourPunCallbacks,IPunObservable
+public class PlayerController : MonoBehaviourPunCallbacks,IPunObservable,IDamageable<RaycastHit>
 {
     public float speed = 12f;
     public float gravity = -9.81f;
     public float jumpHeight = 3;
+
+    public float health = 100;
     public CharacterController controller;
 
     public float interactRange = 2f;
@@ -28,6 +31,8 @@ public class PlayerController : MonoBehaviourPunCallbacks,IPunObservable
     private float time;
     private float duration;
     private float recoil;
+    protected Collider ownCollider;
+
 
     PhotonView pv;
     void Start()
@@ -39,6 +44,7 @@ public class PlayerController : MonoBehaviourPunCallbacks,IPunObservable
             Destroy(GetComponentInChildren<AudioListener>());
         }
         Cursor.lockState = CursorLockMode.Locked;
+        ownCollider = GetComponent<Collider>();
         
     }
 
@@ -106,7 +112,7 @@ public class PlayerController : MonoBehaviourPunCallbacks,IPunObservable
 
         int ignorePlayer = ~LayerMask.GetMask("Player");
 
-        if (Physics.Raycast(r, out hit, interactRange, ignorePlayer))
+        if (Physics.Raycast(r, out hit, interactRange,ignorePlayer))
         {
             IInteractable i = hit.collider.gameObject.GetComponent<IInteractable>();
             if (i != null)
@@ -127,13 +133,32 @@ public class PlayerController : MonoBehaviourPunCallbacks,IPunObservable
     {
         if (stream.IsWriting)
         {
-            //stream.SendNext(transform.position);
-            //stream.SendNext(transform.rotation);
+            stream.SendNext(health);
         }
         else
         {
-            //transform.position = (Vector3)stream.ReceiveNext();
-            //transform.rotation = (Quaternion)stream.ReceiveNext();
+            health = (float)stream.ReceiveNext();
         }
+    }
+
+    public void Damage(float damage, RaycastHit hit)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "explosion"), transform.position, transform.rotation);
+            Respawn();
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        
+    }
+    
+    void Respawn()
+    {
+        transform.position = GameManager.instance.spawnpoint.position;
+        health = 100f;
     }
 }

@@ -33,6 +33,7 @@ public class AsaultRifle : Weapon
         if (hit.transform.GetComponent<IDamageable<RaycastHit>>() != null)
         {
             IDamageable<RaycastHit> hitObj = hit.transform.GetComponent<IDamageable<RaycastHit>>();
+            if(hitObj != null)
             hitObj.Damage(damage, hit);
         }
         //GameObject obj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
