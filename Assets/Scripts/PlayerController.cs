@@ -143,19 +143,20 @@ public class PlayerController : MonoBehaviourPunCallbacks,IPunObservable,IDamage
 
     public void Damage(float damage, RaycastHit hit)
     {
+        photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage);
+    }
+
+    [PunRPC]
+    public void TakeDamage(float damage)
+    {
         health -= damage;
         if (health <= 0)
         {
             PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "explosion"), transform.position, transform.rotation);
-            Respawn();
+            photonView.RPC("Respawn", RpcTarget.AllBuffered, damage);
         }
     }
-
-    public void TakeDamage(float damage)
-    {
-        
-    }
-    
+    [PunRPC]
     void Respawn()
     {
         transform.position = GameManager.instance.spawnpoint.position;
