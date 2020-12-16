@@ -12,7 +12,7 @@ public class Health : Target, IPunObservable,IDamageable<RaycastHit>
     {
         PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "explosion"), transform.position, transform.rotation);
         health = 100f;
-        transform.position = GameManager.instance.spawnpoint.position;
+        transform.position = GameManager.instance.spawnpoint[Random.Range(0, GameManager.instance.spawnpoint.Length)].position;
     }
 
     public void Damage(float damage, RaycastHit hit)
@@ -22,7 +22,7 @@ public class Health : Target, IPunObservable,IDamageable<RaycastHit>
     }
     public void Start()
     {
-        OnTakeDamage.AddListener(Hit);
+        //OnTakeDamage.AddListener(Hit);
     }
     void Hit()
     {
