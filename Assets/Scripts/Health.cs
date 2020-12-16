@@ -18,8 +18,14 @@ public class Health : Target, IPunObservable,IDamageable<RaycastHit>
     public void Damage(float damage, RaycastHit hit)
     {
         photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage, hit.normal);
+    }
+    public void Start()
+    {
+        OnTakeDamage.AddListener(Hit);
+    }
+    void Hit()
+    {
         StartCoroutine(indicateDamage());
-
     }
 
     private IEnumerator indicateDamage()
