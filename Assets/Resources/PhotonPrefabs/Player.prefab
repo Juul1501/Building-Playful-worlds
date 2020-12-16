@@ -782,6 +782,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8109634dbf2b8374984c6802baba0b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
   health: 50
   hudCamera: {fileID: 4162595956191979853}
 --- !u!136 &-628877777351310322
