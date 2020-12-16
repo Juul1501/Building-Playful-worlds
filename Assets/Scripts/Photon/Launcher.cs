@@ -13,6 +13,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 	[SerializeField] TMP_InputField roomNameInputField;
 	[SerializeField] TMP_Text errorText;
 	[SerializeField] TMP_Text roomNameText;
+	[SerializeField] TMP_Text PlayerNameText;
 	[SerializeField] Transform roomListContent;
 	[SerializeField] GameObject roomListItemPrefab;
 	[SerializeField] Transform playerListContent;
