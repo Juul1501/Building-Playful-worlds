@@ -20,6 +20,7 @@ public class AsaultRifle : Weapon
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        playerController = GetComponentInParent<PlayerController>();
     }
     protected override void Shoot()
     {
@@ -32,20 +33,14 @@ public class AsaultRifle : Weapon
         Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range);
         if (hit.transform.GetComponent<IDamageable<RaycastHit>>() != null)
         {
-            //PhotonView hitObj = hit.transform.GetComponent<PhotonView>();
-            //hitObj.RPC("TakeDamage", RpcTarget.AllBuffered, damage, hit.normal);
             IDamageable<RaycastHit> hitobj = hit.transform.GetComponent<IDamageable<RaycastHit>>();
             hitobj.Damage(damage,hit);
         }
-        //GameObject obj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
         GameObject obj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "impacteffect"), hit.point, Quaternion.LookRotation(hit.normal));
-        //StartCoroutine(player.destroy(obj,2f));
-
-        //GameObject flash = Instantiate(muzzleFlash, flashHolder);
         GameObject flash = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "rifleflare"), flashHolder.position, flashHolder.rotation);
+        playerController.photonView.RPC("PlaySound", RpcTarget.All);
+
         flash.transform.parent = flashHolder;
-        //StartCoroutine(player.destroy(flash, 2f));
-        audioSource.PlayOneShot(shootSound);
         ammo -= 1;
         GenerateRecoil();
 
@@ -89,9 +84,6 @@ public class AsaultRifle : Weapon
 
     void GenerateRecoil()
     {
-
         player.Recoil(verticalRecoil,recoilDuration);
     }
-
-
 }
