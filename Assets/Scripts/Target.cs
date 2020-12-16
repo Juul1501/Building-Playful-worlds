@@ -13,7 +13,6 @@ public abstract class Target : MonoBehaviourPunCallbacks
         health -= damage;
         if (health <= 0)
         {
-            GameManager.instance.DestroySceneObject(this.photonView);
             Die();
         }
     }
