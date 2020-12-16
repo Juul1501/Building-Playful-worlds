@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class PlayerController : MonoBehaviourPunCallbacks,IPunObservable,IDamageable<RaycastHit>
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -128,37 +128,11 @@ public class PlayerController : MonoBehaviourPunCallbacks,IPunObservable,IDamage
         time = duration;
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    [PunRPC]
+    public void PlaySound()
     {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(health);
-        }
-        else
-        {
-            health = (float)stream.ReceiveNext();
-        }
-    }
-
-    //[PunRPC]
-    //public void TakeDamage(float damage, Vector3 normal)
-    //{
-    //    health -= damage;
-    //    if (health <= 0)
-    //    {
-    //        //GameManager.instance.DestroySceneObject(this.photonView);
-    //        Die();
-    //    }
-    //}
-
-    void Die()
-    {
-        transform.position = GameManager.instance.spawnpoint.position;
-        health = 100f;
-    }
-
-    public void Damage(float damage, RaycastHit hit)
-    {
-        photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage, hit.normal);
+        AudioSource audioRPC = gameObject.AddComponent<AudioSource>();
+        AudioClip clip = GetComponentInChildren<AsaultRifle>().shootSound;
+        audioRPC.PlayOneShot(clip);
     }
 }
