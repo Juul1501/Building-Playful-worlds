@@ -32,8 +32,10 @@ public class AsaultRifle : Weapon
         Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range);
         if (hit.transform.GetComponent<IDamageable<RaycastHit>>() != null)
         {
-            IDamageable<RaycastHit> hitObj = hit.transform.GetComponent<IDamageable<RaycastHit>>();
-            hitObj.Damage(damage, hit);
+            //PhotonView hitObj = hit.transform.GetComponent<PhotonView>();
+            //hitObj.RPC("TakeDamage", RpcTarget.AllBuffered, damage, hit.normal);
+            IDamageable<RaycastHit> hitobj = hit.transform.GetComponent<IDamageable<RaycastHit>>();
+            hitobj.Damage(damage,hit);
         }
         //GameObject obj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
         GameObject obj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "impacteffect"), hit.point, Quaternion.LookRotation(hit.normal));

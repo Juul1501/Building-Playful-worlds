@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5154451810550553714}
   - component: {fileID: 5154451810550553713}
   - component: {fileID: 5154451810550553712}
-  - component: {fileID: 5154451810550553711}
   - component: {fileID: -5220406966200418176}
   - component: {fileID: 2510231924840825418}
+  - component: {fileID: 3085075939700367692}
   m_Layer: 0
   m_Name: target
   m_TagString: Untagged
@@ -132,22 +132,6 @@ MonoBehaviour:
   weight: 0
   image: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   points: 50
---- !u!114 &5154451810550553711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5154451810550553710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b45cead5bc338a947a55608931a9f9b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 50
-  rb: {fileID: 5154451810550553713}
-  force: 20
-  explosion: {fileID: 0}
 --- !u!114 &-5220406966200418176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,11 +147,12 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  observableSearch: 0
+  observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 1
   ObservedComponents:
-  - {fileID: 5154451810550553711}
+  - {fileID: 2510231924840825418}
+  - {fileID: 3085075939700367692}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -187,3 +172,16 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &3085075939700367692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5154451810550553710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e606be768c3715f439ddb665a3857524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50

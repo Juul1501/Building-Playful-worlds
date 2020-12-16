@@ -9,8 +9,7 @@ public class PlayerController : MonoBehaviourPunCallbacks,IPunObservable,IDamage
     public float speed = 12f;
     public float gravity = -9.81f;
     public float jumpHeight = 3;
-
-    public float health = 100;
+    public float health = 100f;
     public CharacterController controller;
 
     public float interactRange = 2f;
@@ -141,25 +140,25 @@ public class PlayerController : MonoBehaviourPunCallbacks,IPunObservable,IDamage
         }
     }
 
-    public void Damage(float damage, RaycastHit hit)
-    {
-        photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage);
-    }
+    //[PunRPC]
+    //public void TakeDamage(float damage, Vector3 normal)
+    //{
+    //    health -= damage;
+    //    if (health <= 0)
+    //    {
+    //        //GameManager.instance.DestroySceneObject(this.photonView);
+    //        Die();
+    //    }
+    //}
 
-    [PunRPC]
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "explosion"), transform.position, transform.rotation);
-            photonView.RPC("Respawn", RpcTarget.AllBuffered, damage);
-        }
-    }
-    [PunRPC]
-    public void Respawn()
+    void Die()
     {
         transform.position = GameManager.instance.spawnpoint.position;
         health = 100f;
+    }
+
+    public void Damage(float damage, RaycastHit hit)
+    {
+        photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage, hit.normal);
     }
 }
