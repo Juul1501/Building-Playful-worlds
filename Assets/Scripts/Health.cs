@@ -18,6 +18,7 @@ public class Health : Target, IPunObservable,IDamageable<RaycastHit>
     public void Damage(float damage, RaycastHit hit)
     {
         photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage, hit.normal);
+        Hit();
     }
     public void Start()
     {

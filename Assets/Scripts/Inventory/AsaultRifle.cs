@@ -36,7 +36,9 @@ public class AsaultRifle : Weapon
             IDamageable<RaycastHit> hitobj = hit.transform.GetComponent<IDamageable<RaycastHit>>();
             hitobj.Damage(damage,hit);
         }
-        GameObject obj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "impacteffect"), hit.point, Quaternion.LookRotation(hit.normal));
+        if(hit.collider.tag != "player")
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "impacteffect"), hit.point, Quaternion.LookRotation(hit.normal));
+
         GameObject flash = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "rifleflare"), flashHolder.position, flashHolder.rotation);
         playerController.photonView.RPC("PlaySound", RpcTarget.All);
 
