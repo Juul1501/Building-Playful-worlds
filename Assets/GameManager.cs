@@ -7,7 +7,7 @@ using System.IO;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public static GameManager instance;
-    public Transform spawnpoint;
+    public Transform[] spawnpoint;
     public Transform[] targetPoints;
     void Awake()
     {
