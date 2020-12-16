@@ -16,7 +16,9 @@ public abstract class Target : MonoBehaviourPunCallbacks
     [PunRPC]
     public void TakeDamage(float damage, Vector3 normal)
     {
+        if(photonView.IsMine)
         OnTakeDamage.Invoke();
+
         health -= damage;
         if (health <= 0)
         {
