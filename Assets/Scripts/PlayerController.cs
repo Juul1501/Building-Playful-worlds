@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public float jumpHeight = 3;
     public float health = 100f;
     public CharacterController controller;
-
+    public AudioClip shootsound;
     public float interactRange = 2f;
 
     public float mouseSensitivity = 120;
@@ -132,7 +132,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public void PlaySound()
     {
         AudioSource audioRPC = gameObject.AddComponent<AudioSource>();
-        AudioClip clip = GetComponentInChildren<AsaultRifle>().shootSound;
-        audioRPC.PlayOneShot(clip);
+        audioRPC.clip = shootsound;
+        audioRPC.spatialBlend = 1;
+        audioRPC.minDistance = 5;
+        audioRPC.maxDistance = 50;
+        audioRPC.Play();
+        Destroy(audioRPC, 2f);
     }
 }

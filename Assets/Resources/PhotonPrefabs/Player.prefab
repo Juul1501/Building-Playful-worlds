@@ -538,6 +538,7 @@ MonoBehaviour:
   jumpHeight: 1.5
   health: 100
   controller: {fileID: 8736819121166476073}
+  shootsound: {fileID: 8300000, guid: ad2b973e3fbc76044afb0acb15d6e45d, type: 3}
   interactRange: 3
   mouseSensitivity: 100
   camera: {fileID: 8736819120489042924}
@@ -583,7 +584,6 @@ MonoBehaviour:
   Synchronization: 1
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 8736819121166476075}
   - {fileID: 6044084972648186252}
   - {fileID: 1296220398462857940}
   viewIdField: 0
