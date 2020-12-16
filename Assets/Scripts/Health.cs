@@ -22,7 +22,7 @@ public class Health : Target, IPunObservable,IDamageable<RaycastHit>
     }
     public void Start()
     {
-        OnTakeDamage.AddListener(Hit);
+        //OnTakeDamage.AddListener(Hit);
     }
     void Hit()
     {
