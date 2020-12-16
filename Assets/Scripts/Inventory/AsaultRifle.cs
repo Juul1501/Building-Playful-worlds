@@ -39,10 +39,14 @@ public class AsaultRifle : Weapon
         if(hit.collider.tag != "player")
         PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "impacteffect"), hit.point, Quaternion.LookRotation(hit.normal));
 
-        GameObject flash = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "rifleflare"), flashHolder.position, flashHolder.rotation);
+        if (playerController.photonView.IsMine)
+        {
+            GameObject flash = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "rifleflare"), flashHolder.position, flashHolder.rotation);
+            flash.transform.parent = flashHolder;
+        }
+
         playerController.photonView.RPC("PlaySound", RpcTarget.All);
 
-        flash.transform.parent = flashHolder;
         ammo -= 1;
         GenerateRecoil();
 
