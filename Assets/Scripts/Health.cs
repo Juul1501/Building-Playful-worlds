@@ -9,6 +9,7 @@ public class Health : Target, IPunObservable,IDamageable<RaycastHit>
     protected override void Die()
     {
         PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "explosion"), transform.position, transform.rotation);
+        health = 100f;
         transform.position = GameManager.instance.spawnpoint.position;
     }
 
