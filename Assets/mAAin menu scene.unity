@@ -2638,6 +2638,7 @@ MonoBehaviour:
   roomNameInputField: {fileID: 1890006518}
   errorText: {fileID: 1642199031}
   roomNameText: {fileID: 1106162114}
+  PlayerNameText: {fileID: 0}
   roomListContent: {fileID: 1310868856}
   roomListItemPrefab: {fileID: 4022882038360813737, guid: 00a7184135ea7df49b1c1f8d0fe0175c, type: 3}
   playerListContent: {fileID: 1306565058}
@@ -8211,7 +8212,7 @@ LightingSettings:
   serializedVersion: 2
   m_GIWorkflowMode: 1
   m_EnableBakedLightmaps: 1
-  m_EnableRealtimeLightmaps: 1
+  m_EnableRealtimeLightmaps: 0
   m_RealtimeEnvironmentLighting: 1
   m_BounceScale: 1
   m_AlbedoBoost: 1
