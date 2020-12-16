@@ -39,7 +39,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
         pv = GetComponent<PhotonView>();
         if (!pv.IsMine)
         {
-            Destroy(GetComponentInChildren<Camera>().gameObject);
+            Camera[] cams = GetComponentsInChildren<Camera>();
+            foreach (var cam in cams)
+            {
+                Destroy(cam);
+            }
             Destroy(GetComponentInChildren<AudioListener>());
         }
         Cursor.lockState = CursorLockMode.Locked;
