@@ -138,8 +138,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
         AudioSource audioRPC = gameObject.AddComponent<AudioSource>();
         audioRPC.clip = shootsound;
         audioRPC.spatialBlend = 1;
-        audioRPC.minDistance = 5;
-        audioRPC.maxDistance = 50;
+        audioRPC.minDistance = 1;
+        audioRPC.maxDistance = 10;
         audioRPC.Play();
         Destroy(audioRPC, 2f);
     }
