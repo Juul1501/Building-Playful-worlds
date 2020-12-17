@@ -1212,6 +1212,7 @@ MonoBehaviour:
       m_Calls: []
   health: 50
   hudCamera: {fileID: 4162595956191979853}
+  healthBar: {fileID: 0}
 --- !u!136 &-628877777351310322
 CapsuleCollider:
   m_ObjectHideFlags: 0

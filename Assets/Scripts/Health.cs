@@ -24,6 +24,7 @@ public class Health : Target, IPunObservable,IDamageable<RaycastHit>
     }
     public void Start()
     {
+        healthBar = GetComponentInChildren<Slider>();
         healthBar.maxValue = health;
     }
     public void Update()
