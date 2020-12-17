@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using UnityEngine.UI;
 
 public class Health : Target, IPunObservable,IDamageable<RaycastHit>
 {
     public Camera hudCamera;
+    public Slider healthBar;
 
     protected override void Die()
     {
@@ -22,7 +24,15 @@ public class Health : Target, IPunObservable,IDamageable<RaycastHit>
     }
     public void Start()
     {
+        healthBar.maxValue = health;
     }
+    public void Update()
+    {
+        healthBar.value = health;
+        if (health < 100)
+            health += 2 * Time.deltaTime;
+    }
+
     [PunRPC]
     void Hit()
     {
@@ -32,7 +42,7 @@ public class Health : Target, IPunObservable,IDamageable<RaycastHit>
     private IEnumerator indicateDamage()
     {
         hudCamera.enabled = true;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         hudCamera.enabled = false;
     }
 
