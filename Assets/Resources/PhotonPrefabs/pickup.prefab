@@ -126,8 +126,8 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   observableSearch: 2
-  Synchronization: 3
-  OwnershipTransfer: 1
+  Synchronization: 1
+  OwnershipTransfer: 2
   ObservedComponents: []
   viewIdField: 0
   InstantiationId: 0

@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         pv = GetComponent<PhotonView>();
         if (!pv.IsMine)
         {
+            GameManager.instance.players.Add(this.gameObject);
             Camera[] cams = GetComponentsInChildren<Camera>();
             foreach (var cam in cams)
             {

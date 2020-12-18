@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     public float endScreenTime = 20;
 
     public Transform[] pickupSpawnPoints;
+
+    public List<GameObject> players;
+
     void Awake()
     {
         if (instance == null)
@@ -36,8 +39,10 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Start()
     {
+        players = new List<GameObject>();
         if (PhotonNetwork.IsMasterClient)
         {
+
             for (int i = 0; i < targetPoints.Length; i++)
             {
                 PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "target"), targetPoints[i].position, targetPoints[i].rotation);
