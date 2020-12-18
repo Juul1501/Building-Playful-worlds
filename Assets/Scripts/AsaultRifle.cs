@@ -69,7 +69,6 @@ public class AsaultRifle : Weapon
     }
     IEnumerator ReloadWeapon()
     {
-
         audioSource.PlayOneShot(reloadSound);
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);

@@ -1,15 +1,16 @@
-﻿using Photon.Realtime;
+﻿using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class RoomListItem : MonoBehaviour
+public class RoomListItem : MonoBehaviourPunCallbacks
 {
 	[SerializeField] TMP_Text text;
 
 	public RoomInfo info;
-
+	[PunRPC]
 	public void SetUp(RoomInfo info)
 	{
 		this.info = info;

@@ -54,10 +54,10 @@ public class WeaponSwitching : MonoBehaviourPunCallbacks
         {
             selectedWeapon = 3;
         }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            selectedWeaponObj.GetComponent<Weapon>().Respawn();
-        }
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    selectedWeaponObj.GetComponent<Weapon>().Respawn();
+        //}
 
         if (previousSelectedWeapon != selectedWeapon)
         {

@@ -11,6 +11,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 	public static Launcher instance;
 
 	[SerializeField] TMP_InputField roomNameInputField;
+	[SerializeField] TMP_InputField nameInputField;
+	[SerializeField] TMP_InputField createRoomNameInputField;
 	[SerializeField] TMP_Text errorText;
 	[SerializeField] TMP_Text roomNameText;
 	[SerializeField] TMP_Text PlayerNameText;
@@ -49,7 +51,6 @@ public class Launcher : MonoBehaviourPunCallbacks
 	{
 		MenuManager.instance.OpenMenu("title");
 		Debug.Log("Joined Lobby");
-		PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
 	}
 
 	public void CreateRoom()
@@ -58,7 +59,13 @@ public class Launcher : MonoBehaviourPunCallbacks
 		{
 			return;
 		}
+		if (string.IsNullOrEmpty(createRoomNameInputField.text))
+		{
+			return;
+		}
+
 		PhotonNetwork.CreateRoom(roomNameInputField.text);
+		PhotonNetwork.NickName = createRoomNameInputField.text;
 		MenuManager.instance.OpenMenu("loading");
 	}
 
@@ -107,6 +114,11 @@ public class Launcher : MonoBehaviourPunCallbacks
 
 	public void JoinRoom(RoomInfo info)
 	{
+		if (string.IsNullOrEmpty(nameInputField.text))
+		{
+			return;
+		}
+		PhotonNetwork.NickName = nameInputField.text;
 		PhotonNetwork.JoinRoom(info.Name);
 		MenuManager.instance.OpenMenu("loading");
 	}
@@ -127,7 +139,9 @@ public class Launcher : MonoBehaviourPunCallbacks
 		{
 			if (roomList[i].RemovedFromList)
 				continue;
-			Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
+			var roomlistitem = Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>();
+			roomlistitem.SetUp(roomList[i]);
+			photonView.RPC("SetUp", RpcTarget.OthersBuffered, roomList[i]);
 		}
 	}
 
