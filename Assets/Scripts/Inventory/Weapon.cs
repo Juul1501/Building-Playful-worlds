@@ -35,35 +35,32 @@ public abstract class Weapon : MonoBehaviourPunCallbacks, IInteractable,IPunObse
 
     public void Action(GameObject sender)
     {
-        if(GetComponent<PhotonView>() != null)
+        if(GetComponent<PhotonView>() != null && weaponState == ItemState.Dropped)
         {
-            transform.parent = sender.GetComponentInChildren<WeaponSwitching>().transform;
-            GetComponent<Rigidbody>().isKinematic = true;
-            GetComponent<Collider>().enabled = false;
-            transform.localPosition = offset;
-            transform.rotation = Camera.main.transform.rotation;
-            Destroy(GetComponent<PhotonView>());
-            weaponState = ItemState.Equiped;
+            EquipWeapon(sender); 
         }
     }
+    [PunRPC]
     public void Respawn()
     {
-        if (!player.photonView.IsMine)
-            return;
-        gameObject.AddComponent<PhotonView>();
-        GameObject weapon = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", weaponName),transform.position,transform.rotation);
-        weapon.transform.position = Camera.main.transform.position + Camera.main.transform.forward*2;
-        weapon.transform.GetComponent<Rigidbody>().isKinematic = false;
-        weapon.transform.GetComponent<Collider>().enabled = true;
-        weapon.transform.GetComponent<Weapon>().weaponState = ItemState.Dropped;
-        Destroy(this.gameObject);
-
+        if (PhotonNetwork.IsMasterClient &&player.photonView.IsMine)
+        {
+            var go = PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs",weaponName), transform.position + transform.forward.normalized* 2, transform.rotation);
+            go.GetComponent<Weapon>().weaponState = ItemState.Dropped;
+            go.GetComponent<Rigidbody>().isKinematic = false;
+            go.GetComponent<Collider>().enabled = true;
+        }
+        if (photonView.IsMine)
+        {
+            gameObject.AddComponent<PhotonView>();
+            PhotonNetwork.Destroy(this.gameObject);
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        switch (weaponState) {
-
+        switch (weaponState) 
+        {
             case ItemState.Dropped:
 
                 if (stream.IsWriting)
@@ -78,6 +75,18 @@ public abstract class Weapon : MonoBehaviourPunCallbacks, IInteractable,IPunObse
                 }
 
             break;
+        }
     }
+
+    protected virtual void EquipWeapon(GameObject sender)
+    {
+        player = sender.GetComponent<PlayerController>();
+        WeaponSwitching weaponswitch = player.GetComponentInChildren<WeaponSwitching>();
+        transform.parent = weaponswitch.transform;
+        transform.localPosition = offset;
+        transform.rotation = Camera.main.transform.rotation;
+        weaponState = ItemState.Equiped;
+        GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<Collider>().enabled = false;
     }
 }

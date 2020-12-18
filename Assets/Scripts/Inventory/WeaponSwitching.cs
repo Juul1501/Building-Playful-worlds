@@ -10,7 +10,7 @@ public class WeaponSwitching : MonoBehaviourPunCallbacks
 {
     public int selectedWeapon = 0;
     private PlayerController player;
-    private GameObject selectedWeaponObj;
+    public GameObject selectedWeaponObj;
     void Start()
     {
         player = GetComponentInParent<PlayerController>();
@@ -25,7 +25,7 @@ public class WeaponSwitching : MonoBehaviourPunCallbacks
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
-            if (selectedWeapon <= transform.childCount - 1)
+            if (selectedWeapon >= transform.childCount - 1)
                 selectedWeapon = 0;
             else
                 selectedWeapon++;
@@ -33,7 +33,7 @@ public class WeaponSwitching : MonoBehaviourPunCallbacks
 
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
-            if (selectedWeapon >= 0)
+            if (selectedWeapon <= 0)
                 selectedWeapon = transform.childCount - 1;
             else
                 selectedWeapon--;

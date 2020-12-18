@@ -63,11 +63,13 @@ public class AsaultRifle : Weapon
 
     protected override void Reload()
     {
-        if(!isReloading)
+        if (!isReloading)
+            isReloading = true;
         StartCoroutine(ReloadWeapon());
     }
     IEnumerator ReloadWeapon()
     {
+
         audioSource.PlayOneShot(reloadSound);
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
@@ -96,5 +98,11 @@ public class AsaultRifle : Weapon
     void GenerateRecoil()
     {
         player.Recoil(verticalRecoil,recoilDuration);
+    }
+
+    protected override void EquipWeapon(GameObject sender)
+    {
+        base.EquipWeapon(sender);
+        playerController = GetComponentInParent<PlayerController>();
     }
 }

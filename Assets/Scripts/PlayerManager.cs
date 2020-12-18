@@ -24,5 +24,6 @@ public class PlayerManager : MonoBehaviour
 	void CreateController()
 	{
 		PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"), GameManager.instance.spawnpoint[Random.Range(0, GameManager.instance.spawnpoint.Length)].position, Quaternion.identity);
+		PhotonNetwork.Destroy(this.gameObject);
 	}
 }

@@ -15,10 +15,11 @@ public class GrenadeObject : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(explodeTime);
         PhotonNetwork.InstantiateRoomObject(Path.Combine("PhotonPrefabs", "explosion"), transform.position, transform.rotation);
-        ExplodeGrenade(damage);
+        photonView.RPC("ExplodeGrenade", RpcTarget.AllViaServer, damage);
         Destroy(this.gameObject);
     }
 
+    [PunRPC]
     public void ExplodeGrenade(float damage)
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, damageRange);

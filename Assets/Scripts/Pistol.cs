@@ -43,33 +43,38 @@ public class Pistol : Weapon
     }
     protected override void Shoot()
     {
-        if (ammo <= 0)
-            return;
-
-        anim.SetBool("Shooting", true);
-        isReloading = false;
-        RaycastHit hit;
-        Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range);
-        if (hit.transform.GetComponent<IDamageable<RaycastHit>>() != null)
+        switch (weaponState)
         {
-            IDamageable<RaycastHit> hitObj = hit.transform.GetComponent<IDamageable<RaycastHit>>();
-            hitObj.Damage(damage, hit);
+            case ItemState.Equiped:
+                if (ammo <= 0)
+                    return;
 
+                anim.SetBool("Shooting", true);
+                isReloading = false;
+                RaycastHit hit;
+                Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range);
+                if (hit.transform.GetComponent<IDamageable<RaycastHit>>() != null)
+                {
+                    IDamageable<RaycastHit> hitObj = hit.transform.GetComponent<IDamageable<RaycastHit>>();
+                    hitObj.Damage(damage, hit);
+
+                }
+                if (hit.collider.tag != "player")
+                    PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "pistolimpact"), hit.point, Quaternion.LookRotation(hit.normal));
+
+                if (playerController.photonView.IsMine)
+                {
+                    GameObject flash = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "pistolmuzzle"), flashHolder.position, flashHolder.rotation);
+                    flash.transform.parent = flashHolder;
+                }
+
+                if (playerController.photonView.IsMine)
+                    playerController.photonView.RPC("PlaySound", RpcTarget.All, "Pistol");
+
+                ammo -= 1;
+                GenerateRecoil();
+                break;
         }
-        if (hit.collider.tag != "player")
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "pistolimpact"), hit.point, Quaternion.LookRotation(hit.normal));
-
-        if (playerController.photonView.IsMine)
-        {
-            GameObject flash = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "pistolmuzzle"), flashHolder.position, flashHolder.rotation);
-            flash.transform.parent = flashHolder;
-        }
-
-        if (playerController.photonView.IsMine)
-            playerController.photonView.RPC("PlaySound", RpcTarget.All,"Pistol");
-
-        ammo -= 1;
-        GenerateRecoil();
     }
 
     protected override void Reload()
