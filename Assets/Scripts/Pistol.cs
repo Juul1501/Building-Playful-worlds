@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
+using System.IO;
 public class Pistol : Weapon
 {
     public GameObject impactEffect;
@@ -16,17 +17,18 @@ public class Pistol : Weapon
     public float recoilDuration;
 
     public Animator anim;
-
+    private PlayerController playerController;
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        playerController = GetComponentInParent<PlayerController>();
+    }
+    public void OnEnable()
+    {
+        isReloading = false;
     }
 
     protected override void Update()
     {
-        if (!isEquiped)
-            return;
-
         if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
         {
             nextTimeToFire = Time.time + fireRate;
@@ -54,14 +56,17 @@ public class Pistol : Weapon
             hitObj.Damage(damage, hit);
 
         }
-        GameObject obj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-        Destroy(obj, 2f);
+        if (hit.collider.tag != "player")
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "pistolimpact"), hit.point, Quaternion.LookRotation(hit.normal));
 
-        GameObject flash = Instantiate(muzzleFlash, flashHolder);
-        flash.transform.position = flashHolder.position;
-        flash.transform.rotation = flashHolder.rotation;
+        if (playerController.photonView.IsMine)
+        {
+            GameObject flash = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "pistolmuzzle"), flashHolder.position, flashHolder.rotation);
+            flash.transform.parent = flashHolder;
+        }
 
-        audioSource.PlayOneShot(shootSound);
+        if (playerController.photonView.IsMine)
+            playerController.photonView.RPC("PlaySound", RpcTarget.All,"Pistol");
 
         ammo -= 1;
         GenerateRecoil();

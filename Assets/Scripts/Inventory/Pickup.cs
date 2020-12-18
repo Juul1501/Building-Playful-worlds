@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Pickup : MonoBehaviour, IInteractable
+public abstract class Pickup : MonoBehaviour
 {
     public string objectName;
     public float weight;
@@ -14,13 +14,13 @@ public abstract class Pickup : MonoBehaviour, IInteractable
     //    InventoryUI.instance.RegisterPickUpItem(this);
     //}
     
-    public void Action()
-    {
-        if (Inventory.instance.AddItem(CreateItem()))
-        {
-            gameObject.SetActive(false);
-        }
-    }
+    //public void Action()
+    //{
+    //    if (Inventory.instance.AddItem(CreateItem()))
+    //    {
+    //        gameObject.SetActive(false);
+    //    }
+    //}
 
     public bool isInInventory()
     {

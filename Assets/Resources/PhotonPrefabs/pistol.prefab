@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f1906c6c10e7a346b77fd6fb2641249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponName: pistol
   damage: 10
   range: 50
   ammo: 15
@@ -144,6 +145,7 @@ MonoBehaviour:
   fireRate: 0.02
   reloadTime: 2
   offset: {x: 0.18, y: -0.143, z: 0.291}
+  weaponState: 1
   player: {fileID: 0}
   impactEffect: {fileID: 1879272669879180, guid: 9aef5c2b44fcd9a45b7789e47f954670, type: 3}
   muzzleFlash: {fileID: 1000012903210382, guid: e165b34d6402b6449bce6c32e18c8419, type: 3}
@@ -186,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100016, guid: cc34ae6a7e465584aa9e4dcc48852048, type: 3}
       propertyPath: m_Name
-      value: Pistol Variant
+      value: pistol
       objectReference: {fileID: 0}
     - target: {fileID: 400016, guid: cc34ae6a7e465584aa9e4dcc48852048, type: 3}
       propertyPath: m_RootOrder

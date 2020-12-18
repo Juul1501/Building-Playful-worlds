@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public float jumpHeight = 3;
     public float health = 100f;
     public CharacterController controller;
-    public AudioClip shootsound;
+    public AudioClip[] shootsounds;
     public float interactRange = 2f;
 
     public float mouseSensitivity = 120;
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     private float duration;
     private float recoil;
     protected Collider ownCollider;
-
+    AudioSource audioRPC;
 
     PhotonView pv;
     void Start()
@@ -48,7 +48,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
         Cursor.lockState = CursorLockMode.Locked;
         ownCollider = GetComponent<Collider>();
-        
+       audioRPC = gameObject.GetComponent<AudioSource>();
+
+
     }
 
     void Update()
@@ -120,7 +122,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
             IInteractable i = hit.collider.gameObject.GetComponent<IInteractable>();
             if (i != null)
             {
-                i.Action();
+                i.Action(this.gameObject);
             }
         }
     }
@@ -133,14 +135,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void PlaySound()
+    public void PlaySound(string name)
     {
-        AudioSource audioRPC = gameObject.AddComponent<AudioSource>();
-        audioRPC.clip = shootsound;
-        audioRPC.spatialBlend = 1;
-        audioRPC.minDistance = 1;
-        audioRPC.maxDistance = 10;
-        audioRPC.Play();
-        Destroy(audioRPC, 2f);
+        if(name == "Rifle")
+        audioRPC.PlayOneShot(shootsounds[0]);
+
+        if (name == "Pistol")
+        audioRPC.PlayOneShot(shootsounds[1]);
     }
 }

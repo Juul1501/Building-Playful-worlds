@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 2245454404773924541}
   - component: {fileID: 8465496677317311655}
   m_Layer: 0
-  m_Name: AsaultRifle
+  m_Name: rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -559,6 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018b4b89f5bec6e46a2ef6261c49eaa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponName: rifle
   damage: 10
   range: 100
   ammo: 30
@@ -566,6 +567,7 @@ MonoBehaviour:
   fireRate: 0.12
   reloadTime: 3
   offset: {x: 0.422, y: -0.211, z: 0.33}
+  weaponState: 1
   player: {fileID: 0}
   impactEffect: {fileID: 2480036174541941889, guid: f6194270910176b469253872e5670789, type: 3}
   muzzleFlash: {fileID: 6830182972989072967, guid: 0a44f9627223aab49a0dccb2a4f858d8, type: 3}

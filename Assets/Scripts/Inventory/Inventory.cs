@@ -14,15 +14,6 @@ public class Inventory : MonoBehaviour
     public GameObject player;
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this);
-        }
         items = new List<Item>();
     }
 
@@ -80,7 +71,6 @@ public class Inventory : MonoBehaviour
             SelectWeapon(activeSlot);
             return true;
         }
-
     }
 
     public void SelectWeapon(int slot)
@@ -96,7 +86,6 @@ public class Inventory : MonoBehaviour
             {
                 currentWeapon.gameObject.GetComponent<Collider>().enabled = false;
                 currentWeapon.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                currentWeapon.isEquiped = true;
                 currentWeapon.gameObject.SetActive(true);
             }
         }

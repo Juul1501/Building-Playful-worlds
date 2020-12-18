@@ -5,7 +5,7 @@ using Photon.Pun;
 using System.IO;
 using UnityEngine.UI;
 
-public class Health : Target, IPunObservable,IDamageable<RaycastHit>
+public class Health : Target, IPunObservable,IDamageable<RaycastHit>,IDamageable<GameObject>
 {
     public Camera hudCamera;
     public Slider healthBar;
@@ -21,6 +21,10 @@ public class Health : Target, IPunObservable,IDamageable<RaycastHit>
     {
         photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage, hit.normal);
         photonView.RPC("Hit", RpcTarget.Others);
+    }
+    public void Damage(float damage, GameObject hit)
+    {
+
     }
     public void Start()
     {
@@ -58,4 +62,6 @@ public class Health : Target, IPunObservable,IDamageable<RaycastHit>
             health = (float)stream.ReceiveNext();
         }
     }
+
+
 }
